@@ -7,4 +7,4 @@ def make_me_a_pi():
 ##between Circuit and software.
 
 ##This is only a hello file for testing
-##modification in my PuDong Home computer.
+##modification both in my PuDong Home computer and mobile computer.
