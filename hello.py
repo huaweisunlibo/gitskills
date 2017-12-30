@@ -6,7 +6,8 @@ def make_me_a_pi():
 ##OTDR Project will use the file for Serial Communication 
 ##between Circuit and software.
 
-##This is only a hello file for testing
-##Modification in my mobile computer.
-
+##This is only a hello file for testing.
+##modification both in my PuDong Home computer and mobile computer.
 ##We will ready for the building relationship between the local branch and remote branch.
+
+
