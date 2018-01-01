@@ -1,0 +1,141 @@
+windows下GPG的使用，参考资料
+http://blog.csdn.net/x728999452/article/details/50759249
+
+原创 2018年01月01日 10:37:31
+
+GPG即GNU PrivacyGuard，它是加密工具PGP（Pretty Good Privacy）的非商业化版本，
+用于对Email、文件及其他数据的收发进行加密与验证，确保通信数据的可靠性和真实性。
+
+第一步：
+https://gpg4win.org/download.html
+
+第二步：
+下载软件 PayPal ￥ 0
+
+第三步：
+安装GPG4WIN-3.0.2.EXE
+
+第四步：
+GIT BASH（GIT终端）
+$gpg --gen-key 
+(default for all)
+
+gpg: key 42A2D9FE marked as ultimately trusted
+public and secret key created and signed.
+
+gpg: checking the trustdb
+gpg: 3 marginal(s) needed, 1 complete(s) needed, PGP trust model
+gpg: depth: 0  valid:   5  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 5u
+pub   2048R/xxxxxxxx 2018-01-01
+      Key fingerprint = 9451 2359 288B 8772 BC7C  F997 4159 B659 42A2 D9FE
+uid                  huaweisunlibo (ABCDEFG KEY) <huaweisunlibo@163.com>
+sub   2048R/yyyyyyyy 2018-01-01
+
+
+第五步：
+配置GIT使用的GPG程序位置以及SIGNING KEY
+
+5.1 
+在GIT BASH（GIT终端），配置使用的GPG程序位置
+
+$ git config --global gpg.program "C:\Program Files (x86)\GnuPG\bin\gpg.exe"
+
+5.2 
+$ gpg --list-key
+/c/Users/Administrator.USER-20161106WU/.gnupg/pubring.gpg
+---------------------------------------------------------
+pub   2048R/xxxxxxxx 2018-01-01
+uid                  xxx (This is for GPG Signature) <xxx@163.com>
+sub   2048R/yyyyyyyy 2018-01-01
+
+signingkey为yyyyyyyy
+
+5.3
+git config --global user.signingkey yyyyyyyy
+
+
+5.4
+
+$ gpg --list-key
+/c/Users/Administrator.USER-20161106WU/.gnupg/pubring.gpg
+---------------------------------------------------------
+pub   2048R/aaaaaaaa 2018-01-01
+uid                  huaweisunlibo (This is for GPG Signature) <huaweisunlibo@16                                                                                                                                                                                               3.com>
+sub   2048R/bbbbbbbb 2018-01-01
+
+pub   2048R/cccccccc 2018-01-01
+uid                  huaweisunlibo (THIS IS FOR GPG KEY) <huaweisunlibo@163.com>
+sub   2048R/dddddddd 2018-01-01
+
+pub   2048R/eeeeeeee 2018-01-01
+uid                  huaweisunlibo (AA) <huaweisunlibo@163.com>
+sub   2048R/ffffffff 2018-01-01
+
+pub   2048R/gggggggg 2018-01-01
+uid                  huaweisunlibo (ABCD) <huaweisunlibo@163.com>
+sub   2048R/hhhhhhhh 2018-01-01
+
+pub   2048R/xxxxxxxx 2018-01-01
+uid                  huaweisunlibo (ABCDEFG KEY) <huaweisunlibo@163.com>
+sub   2048R/yyyyyyyy 2018-01-01
+
+signingkey为yyyyyyyy
+
+
+$ git config --global user.signingkey yyyyyyyy
+
+5.5
+
+$ git branch
+* dev
+  master
+
+5.6
+$ git log --pretty=oneline --abbrev-commit
+cb881e5 (HEAD -> dev, origin/dev) add introduction for GNU Privacy Guard
+d06e6c7 building relationship
+146bc4c building relationship
+3a725ec modification in my PuDong Home computer and mobile computer
+3fc377a modification in my PuDong Home computer
+3ae8ee6 modification in my mobile computer
+5dcb4fb commit hello file in my mobile computer
+893d13f Merge branch 'dev' of https://github.com/huaweisunlibo/gitskills into de                                                                                                                                                                                               v
+aab674a Created Serial Driver python file v1.0
+2ca4fb0 Created Serial Driver python file
+d74384d (origin/master, origin/HEAD) hukeke
+40118bf (tag: v1.0, master) test
+6acefbe (tag: v0.9) 节目
+c7f1d48 (tag: v0.1) Initial commit
+
+5.7
+$ git tag -s v1.2 -m "signed version 1.2 released" aab674a
+
+5.8
+$ git show v1.2
+tag v1.2
+Tagger: huaweisunlibo <huaweisunlibo@163.com>
+Date:   Mon Jan 1 13:50:58 2018 +0800
+
+signed version 1.2 released
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCAAdFiEEOBYG6AV5WFazMRAAcpIqTVABuiQFAlpJzEIACgkQcpIqTVAB
+uiQhSQf/cxxz5Of81qgwveVJtJFWUpXUsaNrDfh7i5oQBXNO0y/r14KQRtOYUj/r
+U1YTiJz+W2wcoz8LCOwIHab6c7ZuQFLnUJbD2Gf7p8A6CiSzO+zX+3z3PoLFxap1
+mN69CgfCu2CsBc9MdP+FX5RBFllOTQ==
+=9IuS
+-----END PGP SIGNATURE-----
+
+commit aab674a262c9922b70a63fa83ca8815940dfbfeb (tag: v1.2)
+Author: huaweisunlibo <huaweisunlibo@163.com>
+Date:   Sat Dec 30 10:09:40 2017 +0800
+
+    Created Serial Driver python file v1.0
+
+diff --git a/SerialComDriver.py b/SerialComDriver.py
+index 6ecb59d..d0092b1 100644
+--- a/SerialComDriver.py
++++ b/SerialComDriver.py
+@@ -1,4 +1,7 @@
+-import PythonSerial //By Sun Libo @ 2017 DEC 30
++import PythonSerial ##By Sun Libo @ 2017 DEC 30
